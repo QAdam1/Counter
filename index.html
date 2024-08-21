@@ -6,28 +6,84 @@
     <title>Character Counter</title>
     <style>
         body {
-            font-family: Arial, sans-serif;
-            margin: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f4f8;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
-        label, input {
+
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        label {
             display: block;
             margin-bottom: 10px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        #result {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
         }
     </style>
 </head>
 <body>
-    <h1>Character Counter</h1>
-    <form id="charCountForm">
-        <label for="inputString">Enter a string:</label>
-        <input type="text" id="inputString" required>
+    <div class="container">
+        <h1>Character Counter</h1>
+        <form id="charCountForm">
+            <label for="inputString">Enter a string:</label>
+            <input type="text" id="inputString" required>
 
-        <label for="inputChar">Enter a character to count (including emojis):</label>
-        <input type="text" id="inputChar" required>
+            <label for="inputChar">Enter a character to count (including emojis):</label>
+            <input type="text" id="inputChar" required>
 
-        <button type="submit">Count Character</button>
-    </form>
+            <button type="submit">Count Character</button>
+        </form>
 
-    <h2 id="result"></h2>
+        <h2 id="result"></h2>
+    </div>
 
     <script>
         document.getElementById('charCountForm').addEventListener('submit', function(e) {
