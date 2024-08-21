@@ -1,82 +1,87 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: #e8eff1;
+/* Reset some default styles */
+body, h1, h2, form, label, input, button {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+/* General body styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background: #f0f0f0;
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
 }
 
+/* Container styles */
 .container {
-    background: #ffffff;
-    border-radius: 12px;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    padding: 30px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
     max-width: 500px;
     width: 100%;
-    text-align: center;
-    border: 1px solid #dcdcdc;
 }
 
+/* Heading styles */
 h1 {
-    color: #2c3e50;
-    font-size: 28px;
+    font-size: 2em;
     margin-bottom: 20px;
+    color: #007BFF;
+    text-align: center;
 }
 
+/* Form styles */
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+/* Label styles */
 label {
-    display: block;
-    margin-bottom: 10px;
-    font-weight: 600;
-    color: #34495e;
-    text-align: left;
+    font-size: 1em;
+    margin-bottom: 8px;
+    color: #555;
 }
 
-input {
-    width: calc(100% - 20px);
-    padding: 14px;
-    border: 1px solid #bdc3c7;
-    border-radius: 6px;
-    margin-bottom: 20px;
-    font-size: 16px;
-    box-sizing: border-box;
-    background-color: #f8f9fa;
+/* Input styles */
+input[type="text"] {
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 15px;
+    outline: none;
+    transition: border-color 0.3s;
 }
 
-input::placeholder {
-    color: #7f8c8d;
+input[type="text"]:focus {
+    border-color: #007BFF;
 }
 
+/* Button styles */
 button {
-    background-color: #3498db;
-    color: white;
+    padding: 10px 15px;
+    font-size: 1em;
+    color: #fff;
+    background: #007BFF;
     border: none;
-    padding: 12px 20px;
-    border-radius: 6px;
-    font-size: 18px;
+    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
+    transition: background-color 0.3s;
 }
 
 button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
+    background: #0056b3;
 }
 
-button:active {
-    background-color: #1f6f9f;
-}
-
+/* Result styles */
 #result {
-    font-size: 20px;
-    font-weight: 700;
-    color: #2c3e50;
+    font-size: 1.2em;
     margin-top: 20px;
-    padding: 15px;
-    background: #ecf0f1;
-    border-radius: 6px;
-    border: 1px solid #dcdcdc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    color: #333;
 }
