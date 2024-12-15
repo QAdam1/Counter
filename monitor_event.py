@@ -51,19 +51,17 @@ def monitor_page():
     # Monitor for 48 hours
     end_time = datetime.now() + timedelta(hours=48)
     try:
-        while datetime.now() < end_time:
-            driver.get(URL)
-            try:
-                # Wait for the page to load and check for the message
-                WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
-                )
-                print(f"{datetime.now()}: Message found. Checking again in 1 minute.")
-            except:
-                print(f"{datetime.now()}: Message not found! Sending email notification.")
-                send_email()
-                break
-            time.sleep(60)  # Wait 1 minute before checking again
+        driver.get(URL)
+        try:
+            # Wait for the page to load and check for the message
+            WebDriverWait(driver, 10).until(
+                EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
+            )
+            print(f"{datetime.now()}: Message found. Checking again in 1 minute.")
+        except:
+            print(f"{datetime.now()}: Message not found! Sending email notification.")
+            send_email()
+        time.sleep(60)  # Wait 1 minute before checking again
     finally:
         driver.quit()
 
