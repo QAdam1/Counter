@@ -73,6 +73,7 @@ def monitor_page():
                     EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
                 )
                 logging.info(f"{datetime.now()}: Message found. Checking again in 1 minute.")
+                send_email()
             except:
                 logging.info(f"{datetime.now()}: Message not found! Sending email notification.")
                 send_email()
