@@ -14,8 +14,7 @@ SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 EMAIL_ADDRESS = "adamuran10@gmail.com"  # Replace with your email
 EMAIL_PASSWORD = "dszmooobohzdfnsv"  # Replace with your app-specific password
-# TO_EMAIL = "adirov9@gmail.com"
-TO_EMAIL = "adamuran10@gmail.com"
+TO_EMAIL = "adirov9@gmail.com"
 
 # URL and message to check
 URL = "https://www.eventer.co.il/artists/%D7%A2%D7%95%D7%A4%D7%A8_%D7%A0%D7%99%D7%A1%D7%99%D7%9D"
@@ -60,7 +59,6 @@ def monitor_page():
                     EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
                 )
                 print(f"{datetime.now()}: Message found. Checking again in 1 minute.")
-                send_email()
             except:
                 print(f"{datetime.now()}: Message not found! Sending email notification.")
                 send_email()
