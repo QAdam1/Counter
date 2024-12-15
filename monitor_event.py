@@ -14,7 +14,8 @@ SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 EMAIL_ADDRESS = "adamuran10@gmail.com"  # Replace with your email
 EMAIL_PASSWORD = "dszmooobohzdfnsv"  # Replace with your app-specific password
-TO_EMAIL = "adirov9@gmail.com"
+# TO_EMAIL = "adirov9@gmail.com"
+TO_EMAIL = "adamuran10@gmail.com"
 
 # URL and message to check
 URL = "https://www.eventer.co.il/artists/%D7%A2%D7%95%D7%A4%D7%A8_%D7%A0%D7%99%D7%A1%D7%99%D7%9D"
@@ -48,17 +49,23 @@ def monitor_page():
     options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
+    # Monitor for 48 hours
+    end_time = datetime.now() + timedelta(hours=48)
     try:
-        driver.get(URL)
-        try:
-            # Wait for the page to load and check for the message
-            WebDriverWait(driver, 10).until(
-                EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
-            )
-            print(f"{datetime.now()}: Message found. Checking again in 1 minute.")
-        except:
-            print(f"{datetime.now()}: Message not found! Sending email notification.")
-            send_email()
+        while datetime.now() < end_time:
+            driver.get(URL)
+            try:
+                # Wait for the page to load and check for the message
+                WebDriverWait(driver, 10).until(
+                    EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
+                )
+                print(f"{datetime.now()}: Message found. Checking again in 1 minute.")
+                send_email()
+            except:
+                print(f"{datetime.now()}: Message not found! Sending email notification.")
+                send_email()
+                break
+            time.sleep(60)  # Wait 1 minute before checking again
     finally:
         driver.quit()
 
