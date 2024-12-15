@@ -1,5 +1,6 @@
 import time
 import smtplib
+import logging
 from datetime import datetime, timedelta
 from selenium import webdriver
 from selenium.webdriver.common.by import By
@@ -8,6 +9,12 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from webdriver_manager.chrome import ChromeDriverManager
 from email.mime.text import MIMEText
+
+#  Set up logging
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s - %(levelname)s - %(message)s"
+)
 
 # Email Configuration
 SMTP_SERVER = "smtp.gmail.com"
@@ -35,9 +42,9 @@ def send_email():
             server.starttls()
             server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
             server.sendmail(EMAIL_ADDRESS, TO_EMAIL, msg.as_string())
-        print(f"Email sent to {TO_EMAIL}")
+        logging.info(f"Email sent to {TO_EMAIL}")
     except Exception as e:
-        print(f"Failed to send email: {e}")
+        logging.error(f"Failed to send email: {e}")
 
 # Function to monitor the webpage
 def monitor_page():
@@ -52,20 +59,22 @@ def monitor_page():
     end_time = datetime.now() + timedelta(hours=48)
     try:
         while datetime.now() < end_time:
+            logging.info("Checking the webpage for updates...")
             driver.get(URL)
             try:
                 # Wait for the page to load and check for the message
                 WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
                 )
-                print(f"{datetime.now()}: Message found. Checking again in 1 minute.")
+                logging.info(f"{datetime.now()}: Message found. Checking again in 1 minute.")
             except:
-                print(f"{datetime.now()}: Message not found! Sending email notification.")
+                logging.info(f"{datetime.now()}: Message not found! Sending email notification.")
                 send_email()
                 break
             time.sleep(60)  # Wait 1 minute before checking again
     finally:
         driver.quit()
+        logging.info("Monitoring session ended.")
 
 if __name__ == "__main__":
     monitor_page()
