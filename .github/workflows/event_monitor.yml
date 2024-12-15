@@ -20,5 +20,9 @@ jobs:
       run: |
         pip install selenium webdriver-manager
 
-    - name: Run Script
+    - name: Run Monitor Script
+      env:
+        EMAIL_ADDRESS: ${{ secrets.EMAIL_ADDRESS }}
+        EMAIL_PASSWORD: ${{ secrets.EMAIL_PASSWORD }}
+        TO_EMAIL: ${{ secrets.TO_EMAIL }}
       run: python monitor_event.py

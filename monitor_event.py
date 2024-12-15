@@ -1,3 +1,4 @@
+import os
 import time
 import smtplib
 import logging
@@ -19,9 +20,14 @@ logging.basicConfig(
 # Email Configuration
 SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
-EMAIL_ADDRESS = "adamuran10@gmail.com"  # Replace with your email
-EMAIL_PASSWORD = "dszmooobohzdfnsv"  # Replace with your app-specific password
-TO_EMAIL = "adirov9@gmail.com"
+EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
+EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
+TO_EMAIL = os.getenv("TO_EMAIL")
+
+logging.info(f'***********using secrets************
+             email: {EMAIL_ADDRESS}, 
+             password: {EMAIL_PASSWORD}, 
+             toMail: {TO_EMAIL}')
 
 # URL and message to check
 URL = "https://www.eventer.co.il/artists/%D7%A2%D7%95%D7%A4%D7%A8_%D7%A0%D7%99%D7%A1%D7%99%D7%9D"
