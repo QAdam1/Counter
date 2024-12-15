@@ -24,10 +24,10 @@ EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
 TO_EMAIL = os.getenv("TO_EMAIL")
 
-logging.info(f'***********using secrets************
-             email: {EMAIL_ADDRESS}, 
-             password: {EMAIL_PASSWORD}, 
-             toMail: {TO_EMAIL}')
+logging.info(f'***********using secrets************\n' +
+             f'email: {EMAIL_ADDRESS}, \n' +
+             f'password: {EMAIL_PASSWORD}, \n' +
+             f'toMail: {TO_EMAIL}')
 
 # URL and message to check
 URL = "https://www.eventer.co.il/artists/%D7%A2%D7%95%D7%A4%D7%A8_%D7%A0%D7%99%D7%A1%D7%99%D7%9D"
