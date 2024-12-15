@@ -48,8 +48,6 @@ def monitor_page():
     options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-    # Monitor for 48 hours
-    end_time = datetime.now() + timedelta(hours=48)
     try:
         driver.get(URL)
         try:
@@ -61,7 +59,6 @@ def monitor_page():
         except:
             print(f"{datetime.now()}: Message not found! Sending email notification.")
             send_email()
-        time.sleep(60)  # Wait 1 minute before checking again
     finally:
         driver.quit()
 
