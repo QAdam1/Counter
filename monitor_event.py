@@ -61,8 +61,8 @@ def monitor_page():
     options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
-    # Monitor for 48 hours
-    end_time = datetime.now() + timedelta(hours=48)
+    # Monitor for 6 hours
+    end_time = datetime.now() + timedelta(hours=6)
     try:
         while datetime.now() < end_time:
             logging.info("Checking the webpage for updates...")
@@ -72,12 +72,12 @@ def monitor_page():
                 WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
                 )
-                logging.info(f"{datetime.now()}: Message found. Checking again in 1 minute.")
+                logging.info(f"{datetime.now()}: Message found. Checking again in 30 sec.")
             except:
                 logging.info(f"{datetime.now()}: Message not found! Sending email notification.")
                 send_email()
                 break
-            time.sleep(60)  # Wait 1 minute before checking again
+            time.sleep(30)  # Wait 30 sec before checking again
     finally:
         driver.quit()
         logging.info("Monitoring session ended.")
