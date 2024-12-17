@@ -8,6 +8,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.support.select import Select
 from webdriver_manager.chrome import ChromeDriverManager
 from email.mime.text import MIMEText
 
@@ -52,6 +53,10 @@ def send_email():
     except Exception as e:
         logging.error(f"Failed to send email: {e}")
 
+def buyTickets(driver: WebDriver):
+    driver.
+
+
 # Function to monitor the webpage
 def monitor_page():
     # Set up headless Chrome
@@ -60,7 +65,17 @@ def monitor_page():
     options.add_argument("--no-sandbox")
     options.add_argument("--disable-dev-shm-usage")
     driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    wait: WebDriverWait = WebDriverWait(driver=driver, timeout=10)
+    wait.until(
+        EC.element_to_be_clickable((By.XPATH, '(//*[contains(@class, "eventDataColumn")]/parent::*[contains(@ng-show, "eventContainer")])[1]'))
+        .click()
+        )
 
+    driver.find_element(By.XPATH, '(//*[contains(@class, "eventDataColumn")]/parent::*[contains(@ng-show, "eventContainer")])[1]').click()
+    row = 
+    select_amount : Select =  Select(driver.find_element(By.id, 'tickets_amount0'))
+    select_amount.select_by_value('2')
+    
     # Monitor for 6 hours
     end_time = datetime.now() + timedelta(hours=6)
     try:
