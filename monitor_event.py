@@ -70,7 +70,7 @@ def monitor_page():
             try:
                 # Wait for the page to load and check for the message
                 WebDriverWait(driver, 10).until(
-                    EC.presence_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
+                    EC.visibility_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
                 )
                 logging.info(f"{datetime.now()}: Message found. Checking again in 30 sec.")
             except:
