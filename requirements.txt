@@ -1,2 +1,6 @@
-selenium
-webdriver-manager
+selenium~=4.27.1
+webdriver-manager~=4.0.2
+osmnx~=2.0.0
+networkx~=3.4.2
+folium~=0.19.2
+geopy~=2.4.1
