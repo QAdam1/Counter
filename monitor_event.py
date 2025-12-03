@@ -22,33 +22,34 @@ SMTP_SERVER = "smtp.gmail.com"
 SMTP_PORT = 587
 EMAIL_ADDRESS = os.getenv("EMAIL_ADDRESS")
 EMAIL_PASSWORD = os.getenv("EMAIL_PASSWORD")
-TO_EMAIL = os.getenv("TO_EMAIL")
+TO_EMAILS = os.getenv("TO_EMAILS")
 
 logging.info(f'***********using secrets************\n' +
              f'email: {EMAIL_ADDRESS}, \n' +
              f'password: {EMAIL_PASSWORD}, \n' +
-             f'toMail: {TO_EMAIL}')
+             f'toMail: {TO_EMAILS}')
 
 # URL and message to check
 URL = "https://www.eventer.co.il/artists/%D7%A2%D7%95%D7%A4%D7%A8_%D7%A0%D7%99%D7%A1%D7%99%D7%9D"
 MESSAGE = "ברגע זה אין אירועים של עופר ניסים"  # Text indicating no events
 
 # Function to send an email notification
-def send_email():
+def send_emails():
     try:
         subject = "החלה המכירה"
         body = f"The sale has started! Check it here: {URL}"
         msg = MIMEText(body)
         msg["Subject"] = subject
         msg["From"] = EMAIL_ADDRESS
-        msg["To"] = TO_EMAIL
-
-        # Send the email
-        with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
-            server.starttls()
-            server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
-            server.sendmail(EMAIL_ADDRESS, TO_EMAIL, msg.as_string())
-        logging.info(f"Email sent to {TO_EMAIL}")
+        mails = TO_EMAILS.split(',')
+        for mail in mails:
+            msg["To"] = mail
+            # Send the email
+            with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+                server.starttls()
+                server.login(EMAIL_ADDRESS, EMAIL_PASSWORD)
+                server.sendmail(EMAIL_ADDRESS, mail, msg.as_string())
+            logging.info(f"Email sent to {mail}")
     except Exception as e:
         logging.error(f"Failed to send email: {e}")
 
@@ -75,7 +76,7 @@ def monitor_page():
                 logging.info(f"{datetime.now()}: Message found. Checking again in 30 sec.")
             except:
                 logging.info(f"{datetime.now()}: Message not found! Sending email notification.")
-                send_email()
+                send_emails()
                 break
             time.sleep(30)  # Wait 30 sec before checking again
     finally:
