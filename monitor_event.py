@@ -36,13 +36,13 @@ MESSAGE = "ברגע זה אין אירועים של עופר ניסים"  # Text
 # Function to send an email notification
 def send_emails():
     try:
-        subject = "החלה המכירה"
-        body = f"The sale has started! Check it here: {URL}"
-        msg = MIMEText(body)
-        msg["Subject"] = subject
-        msg["From"] = EMAIL_ADDRESS
         mails = TO_EMAILS.split(',')
         for mail in mails:
+            subject = "החלה המכירה"
+            body = f"The sale has started! Check it here: {URL}"
+            msg = MIMEText(body)
+            msg["Subject"] = subject
+            msg["From"] = EMAIL_ADDRESS
             msg["To"] = mail
             # Send the email
             with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
