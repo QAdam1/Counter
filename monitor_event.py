@@ -74,8 +74,6 @@ def monitor_page():
                     EC.visibility_of_element_located((By.XPATH, f"//*[contains(text(), '{MESSAGE}')]"))
                 )
                 logging.info(f"{datetime.now()}: Message found. Checking again in 30 sec.")
-                send_emails()
-                break
             except:
                 logging.info(f"{datetime.now()}: Message not found! Sending email notification.")
                 send_emails()
