@@ -2,8 +2,6 @@ name: Event Monitor
 
 on:
   workflow_dispatch:  # To manually trigger the script
-  schedule:
-  - cron: "0 */6 * * *"  # Runs every 6 hours
 
 jobs:
   monitor:
